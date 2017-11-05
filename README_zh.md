@@ -21,7 +21,7 @@
 ## 协议文档
 <span id="protocol-documentation"></span>
 
-### 连接
+### 连接相关
 
  - 蓝牙设备：
     - 设备需配置为从机
@@ -33,7 +33,7 @@
     - SSID 需要以 `LightX-` 开头，后接你计划显示的设备名或ID
  - 设备需在连接建立时发送所有指令的初始状态到APP端
 
-### 书籍协议
+### 数据协议
 
 数据包流将使用8位char字符形式传递，以下使用16位方式表示。
 
@@ -67,12 +67,12 @@
  - `3A 00 42 A2 FF FA`	色温较冷
  - `3A 00 42 FF FF FA`	色温最冷
 
-## Contributing
+## 为项目贡献
 <span id="contributing"></span>
 
 LightX 正在进行积极地开发中，我们欢迎大家提出PR，可以拉取 `dev` 分支，然后提交你的更改。
 
-## License
+## 开源协议
 <span id="license"></span>
 
 LightX 使用 [MIT](./LICENSE) 协议开源。
