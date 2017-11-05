@@ -1,4 +1,4 @@
-import { AppRegistry } from 'react-native';
-import App from './App';
+import { AppRegistry } from 'react-native'
+import App from './src/app'
 
-AppRegistry.registerComponent('LightX', () => App);
+AppRegistry.registerComponent('LightX', () => App)
