@@ -16,7 +16,7 @@
 ## 开始使用
 <span id="getting-started"></span>
 
-因为 LightX 正在开发中且国内访问 Google Play 存在政策问题，所以我们将 apk 文件托管在 Github，点击[这里](./releases)下载。
+因为 LightX 正在开发中且国内访问 Google Play 存在政策问题，所以我们将 apk 文件托管在 Github，点击[这里](https://github.com/noahziheng/LightX/releases)下载。
 
 ## 协议文档
 <span id="protocol-documentation"></span>
