@@ -15,7 +15,7 @@ Supported operating systems are >= Android 4.1 (API 16) and iOS platform is on t
 
 ## Getting Started
 
-LightX is under development and developer is in China which a country block Google,so we only provide a release on Github.You can get apk file from [here](./releases).
+LightX is under development and developer is in China which a country block Google,so we only provide a release on Github.You can get apk file from [here](https://github.com/noahziheng/LightX/releases).
 
 ## Protocol Documentation
 
