@@ -2529,6 +2529,10 @@ http-signature@~1.2.0:
     jsprim "^1.2.2"
     sshpk "^1.7.0"
 
+i18n-js@^3.0.2:
+  version "3.0.2"
+  resolved "http://registry.npm.taobao.org/i18n-js/download/i18n-js-3.0.2.tgz#d14cff2562758e7d30d34ddd58dd12d53fd07b5f"
+
 iconv-lite@0.4.11:
   version "0.4.11"
   resolved "http://registry.npm.taobao.org/iconv-lite/download/iconv-lite-0.4.11.tgz#2ecb42fd294744922209a2e7c404dac8793d8ade"
@@ -4206,6 +4210,12 @@ react-native-easy-grid@0.1.15:
   dependencies:
     lodash "^4.11.1"
 
+react-native-i18n@^2.0.9:
+  version "2.0.9"
+  resolved "http://registry.npm.taobao.org/react-native-i18n/download/react-native-i18n-2.0.9.tgz#cd2afcf184bbaa7244917d30a57e81e939f79b88"
+  dependencies:
+    i18n-js "^3.0.2"
+
 "react-native-keyboard-aware-scroll-view@https://github.com/GeekyAnts/react-native-keyboard-aware-scroll-view":
   version "0.2.9"
   resolved "https://github.com/GeekyAnts/react-native-keyboard-aware-scroll-view#f4805f254d6cc8e3329f5fb224944401f66655db"
@@ -4218,13 +4228,17 @@ react-native-splash-screen@^3.0.1:
   version "3.0.1"
   resolved "http://registry.npm.taobao.org/react-native-splash-screen/download/react-native-splash-screen-3.0.1.tgz#178b29b7d848e6ee5a41fbb9c1299eb2b5aaa600"
 
+react-native-storage@^0.2.2:
+  version "0.2.2"
+  resolved "http://registry.npm.taobao.org/react-native-storage/download/react-native-storage-0.2.2.tgz#4449197f122b2da0650e3704e1f050260ed58d9f"
+
 react-native-tab-view@^0.0.70:
   version "0.0.70"
   resolved "http://registry.npm.taobao.org/react-native-tab-view/download/react-native-tab-view-0.0.70.tgz#1dd2ded32acd0cb6bfef38d26e53675db733b37b"
   dependencies:
     prop-types "^15.5.10"
 
-react-native-vector-icons@~4.4.2:
+react-native-vector-icons@^4.4.2, react-native-vector-icons@~4.4.2:
   version "4.4.2"
   resolved "http://registry.npm.taobao.org/react-native-vector-icons/download/react-native-vector-icons-4.4.2.tgz#090f42ee0396c4cc4eae0ddaa518028ba8df40c7"
   dependencies:
