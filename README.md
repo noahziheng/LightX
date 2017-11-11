@@ -22,10 +22,10 @@ LightX is under development and developer is in China which a country block Goog
 ### Connection
 
  - Bluetooth Device:
-    - Need config for slave
+    - Need config for slave，PIN is set `0000`
     - SSID need be `LightX-` and your device name or id(It will be shown)
  - Wifi Device:
-    - Need config for AP
+    - Need config for AP,no password
     - Device IP need be set `192.168.4.1`
     - Device need start TCP server and listen port `5000`
     - SSID need be `LightX-` and your device name or id(It will be shown)

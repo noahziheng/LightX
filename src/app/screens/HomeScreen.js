@@ -31,6 +31,11 @@ export default class HomeScreen extends Component {
           ssid: 'LightX-1',
           remark: '测试灯具',
           type: 0
+        },
+        {
+          ssid: 'LightX-1',
+          remark: '测试灯具',
+          type: 0
         }
       ]
     }
@@ -63,23 +68,23 @@ export default class HomeScreen extends Component {
           <List
             dataSource={this.ds.cloneWithRows(this.state.devices)}
             renderRow={item =>
-              <ListItem>
-                <Body>
-                  <Text>
+              <ListItem style={{height: 100}} onPress={() => {
+                navigate('Controll')
+              }}>
+                <Body style={{paddingLeft: 20}}>
+                  <Text style={{fontSize: 20}}>
                     {item.remark}
                     <IconFA name={commIcon[item.type]} size={18} />
                   </Text>
-                  <Text note>{item.ssid}</Text>
+                  <Text style={{fontSize: 16}} note>{item.ssid}</Text>
                 </Body>
-                <Right>
-                  <Icon name='arrow-forward' />
-                </Right>
               </ListItem>}
             renderLeftHiddenRow={_ => null}
             renderRightHiddenRow={(data, secId, rowId, rowMap) =>
               <Button full danger onPress={_ => this._deleteRow(secId, rowId, rowMap)}>
                 <Icon active name='trash' />
               </Button>}
+            leftOpenValue={0}
             rightOpenValue={-75}
             enableEmptySections
           />
