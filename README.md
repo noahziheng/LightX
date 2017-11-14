@@ -29,13 +29,19 @@ LightX is under development and developer is in China which a country block Goog
     - Device IP need be set `192.168.4.1`
     - Device need start TCP server and listen port `5000`
     - SSID need be `LightX-` and your device name or id(It will be shown)
- - Device need send all current states(all commands) to APP when connected.
 
 ### Data Protocol
 
 Packets of data will make up of hexadecimal 8-bit char.
 
 `3A 00` is start of packet, `FF FA` is end of packet
+
+0. Query current state
+
+> Command is `@`,device need send all command(1-3) to Application when get this command
+
+Example:
+ - `3A 00 40 FF FA` Query current state
 
 1. Light On/Of
 
