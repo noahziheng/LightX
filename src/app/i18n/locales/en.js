@@ -4,5 +4,9 @@ export default {
   new_device: 'New Device',
   loading: 'Loading...',
   brightness: 'Brightness',
-  tempature: 'Color Tempature'
+  tempature: 'Color Tempature',
+  remark: 'Remark',
+  dismiss: 'Dismiss',
+  save: 'Save',
+  connecting: 'Connecting...'
 }

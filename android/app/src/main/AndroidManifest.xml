@@ -5,6 +5,13 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>  
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.BLUETOOTH" />
 
     <uses-sdk
         android:minSdkVersion="16"
@@ -29,8 +36,7 @@
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
 
       <!--Fix for 18:9 or larger ratio screen,test on Xiaomi Mix2-->
-        <meta-data android:name="android.max_aspect"
-            android:value="2.1" />
+      <meta-data android:name="android.max_aspect" android:value="2.1" />
     </application>
 
 </manifest>

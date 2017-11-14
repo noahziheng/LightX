@@ -3,10 +3,12 @@ package net.noahgao.lightx;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.devstepbcn.wifi.AndroidWifiPackage;
 import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import io.github.douglasjunior.ReactNativeEasyBluetooth.classic.ClassicPackage;
+import com.solinor.bluetoothstatus.RNBluetoothManagerPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -27,10 +29,12 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new AndroidWifiPackage(),
             new RNI18nPackage(),
             new SplashScreenReactPackage(),
             new ClassicPackage(),
-            new VectorIconsPackage()
+            new VectorIconsPackage(),
+            new RNBluetoothManagerPackage()
       );
     }
 

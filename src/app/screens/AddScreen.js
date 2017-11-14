@@ -8,7 +8,9 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import { Container, Header, Title, Content, Button, Left, Right, Body, List, ListItem, Spinner, Icon, Text } from 'native-base'
 import I18n from '../i18n'
+import IconFA from 'react-native-vector-icons/dist/FontAwesome'
 import EasyBluetooth from 'easy-bluetooth-classic'
+import WiFi from 'react-native-android-wifi'
 
 export default class HomeScreen extends Component {
   constructor (props) {
@@ -18,62 +20,73 @@ export default class HomeScreen extends Component {
       items: []
     }
     this.onDeviceFoundEvent = EasyBluetooth.addOnDeviceFoundListener(this.onDeviceFound.bind(this))
-    this.onStatusChangeEvent = EasyBluetooth.addOnStatusChangeListener(this.onStatusChange.bind(this))
-    this.onDataReadEvent = EasyBluetooth.addOnDataReadListener(this.onDataRead.bind(this))
-    this.onDeviceNameEvent = EasyBluetooth.addOnDeviceNameListener(this.onDeviceName.bind(this))
   }
 
   onDeviceFound (device) {
-    console.log('onDeviceFound')
-    console.log(device)
-  }
-
-  onStatusChange (status) {
-    console.log('onStatusChange')
-    console.log(status)
-  }
-
-  onDataRead (data) {
-    console.log('onDataRead')
-    console.log(data)
-  }
-
-  onDeviceName (name) {
-    console.log('onDeviceName')
-    console.log(name)
+    if (device.name.indexOf('LightX-') !== -1) {
+      device.type = 0
+      this.setState({loading: false, items: this.state.items.concat(device)})
+    }
   }
 
   componentDidMount () {
-    let config = {
-      uuid: '00001101-0000-1000-8000-00805f9b34fb',
-      deviceName: 'Bluetooth Project',
-      bufferSize: 1024,
-      characterDelimiter: '\n'
-    }
-    EasyBluetooth.init(config)
-      .then(function (config) {
-        EasyBluetooth.startScan()
-          .then(function (devices) {
-            console.log('all devices found:')
-            console.log(devices)
-          })
-          .catch(function (ex) {
-            console.warn(ex)
-          })
+    EasyBluetooth.startScan()
+      .then(devices => {
+        // this.setState({loading: false})
       })
       .catch(function (ex) {
         console.warn(ex)
       })
+    WiFi.reScanAndLoadWifiList((wifiStringList) => {
+      var wifiArray = JSON.parse(wifiStringList)
+      this.setState({
+        loading: false,
+        items: this.state.items.concat(wifiArray.filter((device) => {
+          return device.SSID.indexOf('LightX-') !== -1
+        }).map((device) => {
+          return {
+            type: 1,
+            name: device.SSID,
+            address: device.BSSID
+          }
+        }))
+      })
+    }, console.error.bind(this))
   }
 
   componentWillUnmount () {
     this.onDeviceFoundEvent.remove()
-    this.onStatusChangeEvent.remove()
-    this.onDataReadEvent.remove()
-    this.onDeviceNameEvent.remove()
+    EasyBluetooth.stopScan()
   }
 
-  getContent () {
+  getList (navigate) {
+    const commIcon = ['bluetooth', 'wifi']
+    if (this.state.items.length > 0) {
+      return (
+        <List dataArray={this.state.items}
+          renderRow={(item) =>
+            <ListItem style={{marginLeft: 0, paddingLeft: 20}} onPress={() => {
+              navigate('FinishAdd', { item })
+            }}>
+              <Text>
+                {item.name}
+                <IconFA name={commIcon[item.type]} size={18} style={{marginLeft: 20}} />
+              </Text>
+            </ListItem>
+          }
+          enableEmptySections />
+      )
+    } else {
+      if (this.state.loading) return null
+      else {
+        return (
+          <View style={{marginTop: 20, alignItems: 'center'}}><Text style={{color: '#666'}}>没有可用设备</Text></View>
+        )
+      }
+    }
+  }
+
+  getLoading () {
     if (this.state.loading) {
       return (
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
@@ -81,16 +94,7 @@ export default class HomeScreen extends Component {
           <Text>{I18n.t('loading')}</Text>
         </View>
       )
-    } else {
-      return (
-        <List dataArray={this.state.items}
-          renderRow={(item) =>
-            <ListItem>
-              <Text>{item}</Text>
-            </ListItem>
-          } />
-      )
-    }
+    } else return null
   }
 
   render () {
@@ -109,11 +113,10 @@ export default class HomeScreen extends Component {
           <Right />
         </Header>
         <Content contentContainerStyle={{flex: 1}}>
-          {this.getContent()}
+          {this.getList(navigate)}
+          {this.getLoading()}
         </Content>
       </Container>
     )
   }
 }
-
-// const styles = StyleSheet.create({})
