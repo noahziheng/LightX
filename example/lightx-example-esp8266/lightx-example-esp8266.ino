@@ -26,6 +26,10 @@ void handleTCPServer () {
       {
         Serial.write(client.read());
       }
+      if (Serial.available())
+      {
+        client.write(Serial.read());
+      }
     }
     delay(1);
     client.stop();

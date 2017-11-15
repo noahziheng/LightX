@@ -11,7 +11,6 @@ import I18n from '../i18n'
 import IconM from 'react-native-vector-icons/dist/MaterialCommunityIcons'
 import IconO from 'react-native-vector-icons/dist/Octicons'
 import Comm from '../comm'
-import { Buffer } from 'buffer'
 
 export default class ControllScreen extends Component {
   constructor (props) {
@@ -33,7 +32,6 @@ export default class ControllScreen extends Component {
   }
 
   onDataRead (data) {
-    data = Buffer.from(data, 'binary')
     if (data[2] === 65) {
       this.setState({
         light_status: data[3] !== 0
@@ -48,7 +46,7 @@ export default class ControllScreen extends Component {
       })
     }
   }
-  
+
   onStatusChange (status) {
     this.setState({
       comm_status: status

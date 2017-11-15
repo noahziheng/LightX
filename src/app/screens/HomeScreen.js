@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react'
-import { View, ListView, AsyncStorage, PermissionsAndroid } from 'react-native'
+import { View, ListView, AsyncStorage, PermissionsAndroid, InteractionManager } from 'react-native'
 import SplashScreen from 'react-native-splash-screen'
 import { Container, Header, Title, Content, Footer, FooterTab, Button, List, ListItem, Body, Icon, Text } from 'native-base'
 import I18n from '../i18n'
@@ -29,42 +29,32 @@ export default class HomeScreen extends Component {
     })
     this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
     this.state = {
-      devices: [
-        {
-          name: 'LightX-1',
-          remark: '测试灯具',
-          type: 0
-        },
-        {
-          name: 'LightX-1',
-          remark: '测试灯具',
-          type: 1
-        }
-      ]
+      devices: []
     }
   }
 
   componentDidMount () {
-    this.requestPermission()
-    this.toggleBluetooth()
-    this.toggleWiFi()
-    this.storage.load({
-      key: 'devices'
-    }).then(ret => {
-      console.log(ret)
-      this.setState({devices: ret})
-    }).catch(err => {
-      console.warn(err.message)
-      switch (err.name) {
-        case 'NotFoundError':
-          this.storage.save({
-            key: 'devices',
-            data: []
-          })
-          break
-      }
+    InteractionManager.runAfterInteractions(() => {
+      this.requestPermission()
+      this.toggleBluetooth()
+      this.toggleWiFi()
+      this.storage.load({
+        key: 'devices'
+      }).then(ret => {
+        console.log(ret)
+        this.setState({devices: ret})
+      }).catch(err => {
+        switch (err.name) {
+          case 'NotFoundError':
+            this.storage.save({
+              key: 'devices',
+              data: []
+            })
+            break
+        }
+      })
+      SplashScreen.hide()
     })
-    SplashScreen.hide()
   }
 
   async requestPermission () {

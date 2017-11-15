@@ -71,6 +71,10 @@ Example:
  - `3A 00 42 A2 FF FA`	Color temperature colder
  - `3A 00 42 FF FF FA`	Color temperature coldest
 
+## Known BUG
+
+Wifi Mode will be broken when you connect to device above 2 times, the BUG is only confirmed on example ESP8266 frimware and reset ESP8266 Module will be fixed the problem.
+
 ## Contributing
 
 LightX is under active development,so we welcome PRs.You can pull `dev` branch,and do your improvement.

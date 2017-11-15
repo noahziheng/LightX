@@ -3,6 +3,7 @@ package net.noahgao.lightx;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.peel.react.TcpSocketsModule;
 import com.devstepbcn.wifi.AndroidWifiPackage;
 import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
@@ -29,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new TcpSocketsModule(),
             new AndroidWifiPackage(),
             new RNI18nPackage(),
             new SplashScreenReactPackage(),

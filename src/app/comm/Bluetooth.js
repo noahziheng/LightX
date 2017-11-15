@@ -1,10 +1,14 @@
 import EasyBluetooth from 'easy-bluetooth-classic'
+import { Buffer } from 'buffer'
 
 class Bluetooth {
   constructor (device, dataReadCb, statusChangeCb) {
     this.status = false
     this.device = device
-    this.onDataReadEvent = EasyBluetooth.addOnDataReadListener(dataReadCb)
+    this.onDataReadEvent = EasyBluetooth.addOnDataReadListener((data) => {
+      data = Buffer.from(data, 'binary')
+      dataReadCb(data)
+    })
     this.onStatusChangeEvent = EasyBluetooth.addOnStatusChangeListener(this.onStatusChange.bind(this))
     this.statusChangeCb = statusChangeCb
   }
