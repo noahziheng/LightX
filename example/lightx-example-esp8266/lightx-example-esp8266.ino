@@ -2,6 +2,11 @@
 int status = WL_IDLE_STATUS;
 
 WiFiServer server(5000);
+WiFiClient client;
+
+int t = -1;
+byte buf_t = 0xFF;
+boolean stop_f = false;
 
 void handleTCPServer ();
 
@@ -17,21 +22,34 @@ void loop() {
 }
 
 void handleTCPServer () {
-  WiFiClient client = server.available(); 
-  if (client)
-  {
-    while (client.connected())
+  if(client.connected() != t) {
+    t = client.connected();
+    Serial.print(t);
+  }
+  if (!client.connected()) {
+    // try to connect to a new client
+    client = server.available();
+  } else {
+    // read data from the connected client
+    if (client.available())
     {
-      if (client.available())
-      {
-        Serial.write(client.read());
+      byte buf = client.read();
+      buf_t = buf;
+      Serial.write(buf);
+      if(buf == 0x44 && buf_t == 0x00) {
+        stop_f = true;
       }
-      if (Serial.available())
-      {
-        client.write(Serial.read());
+      if(buf == 0xFA && stop_f) {
+        stop_f = false;
+        client.flush();
+        Serial.flush();
+        client.stop();
+        return;
       }
     }
-    delay(1);
-    client.stop();
+    if (Serial.available())
+    {
+      client.write(Serial.read());
+    }
   }
 }

@@ -66,14 +66,17 @@ Example:
 > Command is `C`,`00` is warmest,`FF` is coldest.
 
 Example:
- - `3A 00 42 00 FF FA`	Color temperature warmest
- - `3A 00 42 55 FF FA`	Color temperature warmer
- - `3A 00 42 A2 FF FA`	Color temperature colder
- - `3A 00 42 FF FF FA`	Color temperature coldest
+ - `3A 00 43 00 FF FA`	Color temperature warmest
+ - `3A 00 43 55 FF FA`	Color temperature warmer
+ - `3A 00 43 A2 FF FA`	Color temperature colder
+ - `3A 00 43 FF FF FA`	Color temperature coldest
 
-## Known BUG
+4. Disconnect from APP actively
 
-Wifi Mode will be broken when you connect to device above 2 times, the BUG is only confirmed on example ESP8266 frimware and reset ESP8266 Module will be fixed the problem.
+> Command is `D`, Device need close connection actively.
+
+Example:
+ - `3A 00 44 FF FA`	Close connection actively
 
 ## Contributing
 

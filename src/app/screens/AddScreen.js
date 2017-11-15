@@ -23,7 +23,7 @@ export default class HomeScreen extends Component {
   }
 
   onDeviceFound (device) {
-    console.log(device)
+    if (!device.name) return
     if (device.name.indexOf('LightX-') !== -1) {
       device.type = 0
       this.setState({loading: false, items: this.state.items.concat(device)})

@@ -8,7 +8,7 @@ class Wifi {
     this.status = false
     this.device = device
     this.statusChangeCb = statusChangeCb
-    this.client = new net.Socket()
+    this.client = net.createConnection()
     this.buf = []
     this.client.on('data', (data) => {
       data = Buffer.from(data, 'binary')
@@ -26,6 +26,9 @@ class Wifi {
     })
     this.client.on('error', (err) => {
       console.log(err)
+    })
+    this.client.on('end', (r) => {
+      this.client.destroy()
     })
     NetInfo.addEventListener(
       'connectionChange',
@@ -62,21 +65,24 @@ class Wifi {
   disconnect () {
     this.dataReadCb = () => {}
     this.statusChangeCb = () => {}
-    wifi.getSSID((ssid) => {
-      console.log(ssid)
-      if (ssid === this.device.name) {
-        this.setStatus(false)
-        this.client.end()
-        wifi.isRemoveWifiNetwork(this.device.name, (isRemoved) => {
-          console.log('Forgetting the wifi device - ' + this.device.name)
-        })
-        console.log('Comm[Wifi]:Disconnected!')
-      }
+    this.write([0x44], () => {
+      this.client.end()
+      wifi.getSSID((ssid) => {
+        console.log(ssid)
+        if (ssid === this.device.name) {
+          this.setStatus(false)
+          wifi.isRemoveWifiNetwork(this.device.name, (isRemoved) => {
+            console.log('Forgetting the wifi device - ' + this.device.name)
+          })
+          console.log('Comm[Wifi]:Disconnected!')
+        }
+      })
     })
   }
 
-  write (content) {
-    if (this.status) this.client.write(Buffer.from([0x3A, 0x00, ...content, 0xFF, 0xFA]))
+  write (content, Cb?) {
+    if (this.status) this.client.write(Buffer.from([0x3A, 0x00, ...content, 0xFF, 0xFA]), null, Cb)
+    else if (Cb) Cb()
   }
 }
 
